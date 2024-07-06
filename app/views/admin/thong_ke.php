@@ -9,9 +9,6 @@
         if(empty($res['dichvu'])) {
             $res['dichvu'] = 0;
         } 
-        // echo '<pre>';
-        // print_r($res);
-        // echo '<pre>';     
     ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -36,7 +33,7 @@
         ]);
 
         var options = {
-          title: 'My Daily Activities'
+          title: 'Biểu đồ thống kê doanh thu'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -50,13 +47,13 @@
     <div class="display-6 text-center mb-2">Thống kê</div>
     <ul class="nav justify-content-center text-bg-color text-white">
         <li class="nav-item btn btn-primary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thongke">Chung</a>
+            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke">Chung</a>
         </li>
         <li class="nav-item btn btn-secondary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thongke/thong_ke_phong">Tiền phòng</a>
+            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke_phong">Tiền phòng</a>
         </li>
         <li class="nav-item btn btn-secondary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thongke/dichvu">Tiền dịch vụ</a>
+            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke_dich_vu">Tiền dịch vụ</a>
         </li>
     </ul>
         <div class="row mt-1 mx-auto">

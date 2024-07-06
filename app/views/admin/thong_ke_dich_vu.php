@@ -9,33 +9,33 @@
         // echo '<pre>';     
     ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart1);
+        <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart1);
 
-      function drawChart1() {
-        <?php if(!empty($data)): ?>
-            var data = google.visualization.arrayToDataTable([
-                ['Phòng', 'Doanh thu'],
-                <?php
-                    foreach($data as $row) {
-                        echo "['Phòng {$row['ten_phong']}', {$row['doanh_thu']}],";
-                    }
-                ?>
-            ]);
+        function drawChart1() {
+            <?php if(!empty($data)): ?>
+                var data = google.visualization.arrayToDataTable([
+                    ['Dịch vụ', 'Doanh thu'],
+                    <?php
+                        foreach($data as $row) {
+                            echo "['{$row['ten_dich_vu']}', {$row['doanh_thu']}],";
+                        }
+                    ?>
+                ]);
 
-            var options = {
-            title: 'Biểu đồ thống kê doanh thu từng phòng'
-            };
+                var options = {
+                title: 'Biểu đồ thống kê doanh thu từng dịch vụ'
+                };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-            chart.draw(data, options);
-        <?php else: ?>
-            document.getElementById('piechart').innerHTML = '<h3>Không có dữ liệu</h3>';
-        <?php endif;?>
-      }
-    </script>
+                chart.draw(data, options);
+            <?php else: ?>
+                document.getElementById('piechart').innerHTML = '<h3>Không có dữ liệu</h3>';
+            <?php endif;?>
+        }
+        </script>
         <script type="text/javascript">
             google.charts.load('current', {'packages':['bar']});
             google.charts.setOnLoadCallback(drawChart);
@@ -44,10 +44,10 @@
                 <?php if(!empty($data)):?>
 
                     var data = google.visualization.arrayToDataTable([
-                        ['Phòng', 'Số lượng'],
+                        ['Dịch vụ', 'Số lượng'],
                         <?php
                             foreach($data as $row) {
-                                echo "['Phòng {$row['ten_phong']}', {$row['so_luong']}],";
+                                echo "['{$row['ten_dich_vu']}', {$row['so_luong']}],";
                             }
                         ?>
                     
@@ -56,7 +56,7 @@
                     var options = {
                         chart: {
                             title: 'Số lượng phòng',
-                            subtitle: `Xem số lượng phòng từ ${formatDate(start.value)} đến ${formatDate(end.value)}`,
+                            subtitle: `Xem số lượng dịch vụ đã đặt từ ${formatDate(start.value)} đến ${formatDate(end.value)}`,
                         }
                     };
 
@@ -66,7 +66,7 @@
             
                 }
                 <?php endif?>
-    </script>
+        </script>
 </head>
 <body>
     
@@ -79,7 +79,7 @@
             <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke_phong">Tiền phòng</a>
         </li>
         <li class="nav-item btn btn-secondary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke_dich_vu">Tiền dịch vụ</a>
+            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thongke/dichvu">Tiền dịch vụ</a>
         </li>
     </ul>
         <div class="row mt-1 mx-auto">

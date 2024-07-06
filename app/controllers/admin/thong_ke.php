@@ -5,13 +5,15 @@ class Thong_Ke extends Controller
 
     function __construct()
     {
-        $this->model = $this->model('ThongKeModel');;
+        $this->model = $this->model('Database');;
     }
 
     function index()
     {
         $filterAll = filter();
         $res = [];
+        // $res['phong'] = 0;
+        // $res['dichvu'] = 0;
         if(!empty($filterAll)) {
             
             // echo '<pre>';
@@ -43,11 +45,12 @@ class Thong_Ke extends Controller
                
                 if(!empty($data1)) {
                     $res['phong'] = $data1[0]['tong_tien'];
-                }
+                } 
         
                 if(!empty($data2)) {
                     $res['dichvu'] = $data2[0]['tong_tien'];
-                }
+                } 
+     
             }                     
 
         } 
@@ -59,7 +62,5 @@ class Thong_Ke extends Controller
 
     }
 
-    function phong() {
-        $this->view('admin/thong_ke_phong', []);
-    }
+ 
 }
