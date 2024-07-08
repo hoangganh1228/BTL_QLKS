@@ -39,6 +39,9 @@
                             <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/khach_hang">Khách hàng</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/lien_he">Liên hệ</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/tang">Tầng</a>
                         </li>
                         <li class="nav-item">

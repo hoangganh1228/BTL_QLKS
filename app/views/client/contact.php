@@ -60,26 +60,26 @@
             </div>
             <div class="col-lg-6 col-md-6 px-4">
                 <div class="bg-white rounded shadow p-4 ">
-                    <form>
+                    <form method="POST">
                         <h5>Send a message</h5>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Họ tên</label>
-                            <input type="text" class="form-control shadow-none">
+                            <input type="text" name="hoten" class="form-control shadow-none">
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Email </label>
-                            <input type="email" class="form-control shadow-none">
+                            <input type="email" name="email" class="form-control shadow-none">
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;"> Chủ đề </label>
-                            <input type="text" class="form-control shadow-none">
+                            <input type="text" name="chude" class="form-control shadow-none">
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Ghi chú </label>
-                            <textarea class="form-control shadow-none" rows="5" style="resize: none;"></textarea>
+                            <textarea class="form-control shadow-none" rows="5" style="resize: none;" name="ghichu"></textarea>
 
                         </div>
-                        <button type="submit" class="btn text-white custom-bg mt-3">
+                        <button type="submit" class="btn btn-success mt-3">
                             Gửi
                         </button>
                     </form>

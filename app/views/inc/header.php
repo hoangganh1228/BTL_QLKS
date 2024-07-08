@@ -22,6 +22,9 @@
                 <li class="nav-item">
                     <a class="nav-link me-2" href="<?=_WEB_HOST?>/client/contact">Liên hệ </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="<?=_WEB_HOST?>/client/myRooms">Phòng của tôi</a>
+                </li>
 
 
             </ul>

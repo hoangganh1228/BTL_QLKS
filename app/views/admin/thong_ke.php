@@ -22,7 +22,7 @@
         // console.log(dichvu);
 
         if(phong == 0 && dichvu == 0) {
-            document.getElementById('piechart').innerHTML = '<h3>Không có doanh thu trong khoảng thời gian này</h3>';
+            document.getElementById('piechart').innerHTML = '<h3>Không có dữ liệu</h3>';
             return;
         }
 
@@ -46,15 +46,36 @@
     
     <div class="display-6 text-center mb-2">Thống kê</div>
     <ul class="nav justify-content-center text-bg-color text-white">
-        <li class="nav-item btn btn-primary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke">Chung</a>
-        </li>
-        <li class="nav-item btn btn-secondary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke_phong">Tiền phòng</a>
-        </li>
-        <li class="nav-item btn btn-secondary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke_dich_vu">Tiền dịch vụ</a>
-        </li>
+    <?php 
+        $path = _WEB_HOST;
+        if(isset($_GET) && !empty($_GET)) {
+            echo<<<data
+                <li class="nav-item btn btn-primary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke?start=$_GET[start]&end=$_GET[end]">Chung</a>
+                </li>
+                <li class="nav-item btn btn-secondary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke_phong?start=$_GET[start]&end=$_GET[end]">Tiền phòng</a>
+                </li>
+                <li class="nav-item btn btn-secondary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke_dich_vu?start=$_GET[start]&end=$_GET[end]">Tiền dịch vụ</a>
+                </li>
+            data;
+        } else {
+            echo<<<data
+
+                <li class="nav-item btn btn-primary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke">Chung</a>
+                </li>
+                <li class="nav-item btn btn-secondary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke_phong">Tiền phòng</a>
+                </li>
+                <li class="nav-item btn btn-secondary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke_dich_vu">Tiền dịch vụ</a>
+                </li>
+
+            data;
+        }
+    ?>
     </ul>
         <div class="row mt-1 mx-auto">
             <div class="col-lg-6 p-3 my-3 border">

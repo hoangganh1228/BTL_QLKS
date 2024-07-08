@@ -36,51 +36,78 @@
         <?php endif;?>
       }
     </script>
-        <script type="text/javascript">
-            google.charts.load('current', {'packages':['bar']});
-            google.charts.setOnLoadCallback(drawChart);
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
 
-            function drawChart() {
-                <?php if(!empty($data)):?>
+        function drawChart() {
+            <?php if(!empty($data)):?>
 
-                    var data = google.visualization.arrayToDataTable([
-                        ['Phòng', 'Số lượng'],
-                        <?php
-                            foreach($data as $row) {
-                                echo "['Phòng {$row['ten_phong']}', {$row['so_luong']}],";
-                            }
-                        ?>
-                    
-                    ]);
-
-                    var options = {
-                        chart: {
-                            title: 'Số lượng phòng',
-                            subtitle: `Xem số lượng phòng từ ${formatDate(start.value)} đến ${formatDate(end.value)}`,
+                var data = google.visualization.arrayToDataTable([
+                    ['Phòng', 'Số lượng'],
+                    <?php
+                        foreach($data as $row) {
+                            echo "['Phòng {$row['ten_phong']}', {$row['so_luong']}],";
                         }
-                    };
+                    ?>
+                
+                ]);
 
-                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+                var options = {
+                    chart: {
+                        title: 'Số lượng phòng',
+                        subtitle: `Xem số lượng phòng từ ${formatDate(start.value)} đến ${formatDate(end.value)}`,
+                    }
+                };
 
-                    chart.draw(data, google.charts.Bar.convertOptions(options));
-            
-                }
-                <?php endif?>
+                var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+        
+        }
+        <?php endif?>
     </script>
+
+
+
+    
+    
+    
 </head>
 <body>
     
     <div class="display-6 text-center mb-2">Thống kê</div>
     <ul class="nav justify-content-center text-bg-color text-white">
-        <li class="nav-item btn btn-primary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke">Chung</a>
-        </li>
-        <li class="nav-item btn btn-secondary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke_phong">Tiền phòng</a>
-        </li>
-        <li class="nav-item btn btn-secondary">
-            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke_dich_vu">Tiền dịch vụ</a>
-        </li>
+    <?php 
+        $path = _WEB_HOST;
+        if(isset($_GET) && !empty($_GET)) {
+            echo<<<data
+                <li class="nav-item btn btn-secondary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke?start=$_GET[start]&end=$_GET[end]">Chung</a>
+                </li>
+                <li class="nav-item btn btn-primary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke_phong?start=$_GET[start]&end=$_GET[end]">Tiền phòng</a>
+                </li>
+                <li class="nav-item btn btn-secondary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke_dich_vu?start=$_GET[start]&end=$_GET[end]">Tiền dịch vụ</a>
+                </li>
+            data;
+        } else {
+            echo<<<data
+
+                <li class="nav-item btn btn-secondary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke">Chung</a>
+                </li>
+                <li class="nav-item btn btn-primary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke_phong">Tiền phòng</a>
+                </li>
+                <li class="nav-item btn btn-secondary">
+                    <a class="nav-link text-white" href="$path/admin/thong_ke_dich_vu">Tiền dịch vụ</a>
+                </li>
+
+            data;
+        }
+    ?>
     </ul>
         <div class="row mt-1 mx-auto">
             <div class="col-lg-6 p-3 my-3 border">

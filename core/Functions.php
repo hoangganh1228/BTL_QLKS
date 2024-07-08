@@ -80,3 +80,11 @@ function formatNumber($number) {
     // Định dạng số với dấu phân cách hàng nghìn là dấu chấm và không có chữ số thập phân
     return number_format($number, 0, '', '.');
 }
+
+function formatDate($date) {
+    // Tạo đối tượng DateTime từ chuỗi ngày đầu vào
+    $dateTime = new DateTime($date);
+    
+    // Định dạng lại ngày theo định dạng 'd-m-Y'
+    return $dateTime->format('d-m-Y');
+}

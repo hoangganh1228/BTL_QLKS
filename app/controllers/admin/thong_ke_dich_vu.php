@@ -45,7 +45,11 @@ class Thong_Ke_Dich_Vu extends Controller
 
         } 
 
-        $this->view('admin/thong_ke_dich_vu', ['data' => $data]);
+       
+        $this->view('admin/layout', [
+            'page' => 'admin/thong_ke_dich_vu',
+            'data' => $data
+        ]);
 
         
 
