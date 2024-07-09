@@ -30,14 +30,6 @@
                         </button>
                         <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterDropdown">
                             <div class="border bg-light p-3 rounded mb-3">
-                                <h5 class="mb-3" style="font-size: 18px;">ĐIỀU KIỆN</h5>
-                                <label class="form-label">Ngày đặt phòng </label>
-                                <input type="date" name="checkin" class="form-control shadow-none mb-3">
-                                <label class="form-label">Ngày trả phòng</label>
-                                <input type="date" name="checkout" class="form-control shadow-none">
-                                <button class="btn btn-danger mt-2" id="reset-day">Reset</button>
-                            </div>
-                            <div class="border bg-light p-3 rounded mb-3">
                                 <h5 class="mb-3" style="font-size: 18px;">FACILITIES</h5>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Lọc theo loại phòng</label>
@@ -98,8 +90,7 @@
                                     </div>
                                     <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
                                         <h6 class="mb-4">$roomPriceFormat VND</h6>
-                                        <a href="confirm_bookings?sophong=$room[sophong]" class="btn btn-success btn-sm w-100 mt-2 text-white">$room[trangthai] </a>
-                                        <a href="confirm_bookings?sophong=$room[sophong]" class="btn btn-danger btn-sm w-100 mt-2 text-white">Huỷ phòng </a>
+                                        <button class="btn btn-success btn-sm w-100 mt-2 text-white"> $room[trangthai]</button>
                                     </div>
                                     
                                 </div>
@@ -117,7 +108,113 @@
 
 </body>
 
+<script>
+    var typeRoom = document.getElementById('room-filter');
+    var priceFilter = document.getElementById('price-filter');
+    var checkin = document.querySelector('input[name="checkin"]');
+    var checkout = document.querySelector('input[name="checkout"]');
+    var clearButton = document.getElementById('sort-clear');
+    var resetButton = document.getElementById('reset-day');
+                    
 
+    if (typeRoom) {
+        let url = new URL(window.location.href);
+        typeRoom.addEventListener("change", function(e) {
+            const value = e.target.value;
+            url.searchParams.set('typeRoom', value);
+            window.location.href = url.href;
+        });
+        const getTypeRoom = url.searchParams.get('typeRoom');
+        const optionSelected = typeRoom.querySelector(`option[value='${getTypeRoom}']`);
+        if (optionSelected) {
+            optionSelected.selected = true;
+        }
+    }
+
+    if (clearButton) {
+        clearButton.addEventListener('click', function(e) {
+            let url = new URL(window.location.href);
+            if (url.searchParams.has('typeRoom')) {
+                url.searchParams.delete('typeRoom');
+            }
+            if (url.searchParams.has('typeSort')) {
+                url.searchParams.delete('typeSort');
+            }
+            window.location.href = url.href;
+        });
+    }
+
+    if (priceFilter) {
+        let url = new URL(window.location.href);
+        priceFilter.addEventListener("change", function(e) {
+            const value = e.target.value;
+            url.searchParams.set('typeSort', value);
+            window.location.href = url.href;
+        });
+
+        const getTypeSort = url.searchParams.get('typeSort');
+        const optionSelectedPrice = priceFilter.querySelector(`option[value='${getTypeSort}']`);
+        if (optionSelectedPrice) {
+            optionSelectedPrice.selected = true;
+        }
+    }
+
+
+    if(checkin) {
+        let url = new URL(window.location.href);
+        checkin.addEventListener("change", function(e){
+            const value = e.target.value;
+            url.searchParams.set('checkin', value);
+            checkout.value = value;
+            // window.history.pushState({}, '', url.href); // Cập nhật URL mà không tải lại trang
+            window.location.href = url.href;
+
+        })
+        const checkinValue = url.searchParams.get('checkin');
+        if (checkinValue) {
+            checkin.value = checkinValue;
+        }
+    }
+    if(checkout) {
+        let url = new URL(window.location.href);
+        checkout.addEventListener("change", function(e){
+            const value = e.target.value;
+            url.searchParams.set('checkout', value);
+            checkin.value = value;
+            // window.history.pushState({}, '', url.href); // Cập nhật URL mà không tải lại trang
+            if(url.searchParams.get('checkout') == url.searchParams.get('checkin')) {
+                alert("Ngày trả phòng không thể cùng ngày với ngày nhận phòng! Vui lòng chọn lại!")
+            } else if(url.searchParams.get('checkout') < url.searchParams.get('checkin')) {
+                alert("Ngày trả phòng không thể trước ngày nhận phòng! Vui lòng chọn lại!")
+            } else {
+                window.location.href = url.href;
+            }
+        })
+        if(url.searchParams.get('checkout')) {
+            const checkoutValue = url.searchParams.get('checkout');
+            if (checkoutValue) {
+                checkout.value = checkoutValue;
+            }
+        }
+    }
+
+
+
+    if (resetButton) {
+        resetButton.addEventListener('click', function(e) {
+            let url = new URL(window.location.href);
+            if (url.searchParams.has('checkin')) {
+                url.searchParams.delete('checkin');
+            }
+            if (url.searchParams.has('checkout')) {
+                url.searchParams.delete('checkout');
+            }
+            
+            window.location.href = url.href;
+        });
+    }
+    
+</script>
 
 
 </html>

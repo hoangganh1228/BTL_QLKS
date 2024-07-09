@@ -5,7 +5,7 @@ class Thong_Ke_Dich_Vu extends Controller
 
     function __construct()
     {
-        $this->model = $this->model('ThongKeModel');
+        $this->model = $this->model('Database');
     }
 
     function index()

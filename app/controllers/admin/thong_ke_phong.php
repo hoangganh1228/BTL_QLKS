@@ -5,7 +5,7 @@ class Thong_Ke_Phong extends Controller
 
     function __construct()
     {
-        $this->model = $this->model('ThongKeModel');
+        $this->model = $this->model('Database');
     }
 
     function index()

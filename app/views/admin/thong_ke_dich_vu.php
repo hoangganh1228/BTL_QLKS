@@ -4,9 +4,6 @@
     <?php 
         require_once 'configs/bootstrap.php';
 
-        echo '<pre>';
-        print_r($data);
-        echo '<pre>';     
 
  
         
@@ -87,8 +84,8 @@
 
                 var options = {
                 chart: {
-                    title: 'Số lượng phòng từng khách hàng',
-                    subtitle: `Xem số lượng phòng mà khách đặt từ ${formatDate(start.value)} đến ${formatDate(end.value)}`,
+                    title: 'Số lượng dịch vụ từng khách hàng',
+                    subtitle: `Xem số lượng dịch vụ mà khách đặt từ ${formatDate(start.value)} đến ${formatDate(end.value)}`,
                 },
                 bars: 'horizontal' // Required for Material Bar Charts.
                 };

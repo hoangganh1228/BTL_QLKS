@@ -33,8 +33,6 @@ class Thong_Ke extends Controller
                     (ctdp.checkout BETWEEN '$start' AND '$end')) 
                     AND 
                     (ddp.trangthai = 'Đã thanh toán')  
-                    AND
-                    (ctdp.trangthai = 'Đã checkin')
                 ";
 
                 $condition2 = " WHERE
