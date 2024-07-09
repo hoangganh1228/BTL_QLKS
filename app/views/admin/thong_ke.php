@@ -108,8 +108,8 @@
                 </div>
                 <div class="col-lg-6 p-3 my-3 border">
                     <?php
-                        if($res['phong'] != 0 || $res['dichvu'] != 0) {
-                            $tongDoanhThu = formatNumber($res['phong'] + $res['dichvu']);
+                        if($res['phong'] != 0 || $res['dichvu'] != 0 || $res['tiencoc'] != 0) {
+                            $tongDoanhThu = formatNumber($res['phong'] + $res['dichvu'] + $res['tiencoc']);
                             echo<<<data
                                 <div class="text-center">Tổng doanh thu: $tongDoanhThu VND</div>
                             data;
