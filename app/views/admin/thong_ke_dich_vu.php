@@ -4,52 +4,52 @@
     <?php 
         require_once 'configs/bootstrap.php';
 
-        // echo '<pre>';
-        // print_r($data);
-        // echo '<pre>';     
+        echo '<pre>';
+        print_r($data);
+        echo '<pre>';     
 
  
         
     ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart1);
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart1);
 
-        function drawChart1() {
-            <?php if(!empty($data)): ?>
-                var data = google.visualization.arrayToDataTable([
-                    ['Dịch vụ', 'Doanh thu'],
-                    <?php
-                        foreach($data as $row) {
-                            echo "['{$row['ten_dich_vu']}', {$row['doanh_thu']}],";
-                        }
-                    ?>
-                ]);
+                function drawChart1() {
+                    <?php if(!empty($data['services'])): ?>
+                        var data = google.visualization.arrayToDataTable([
+                            ['Dịch vụ', 'Doanh thu'],
+                            <?php
+                                foreach($data['services'] as $row) {
+                                    echo "['{$row['ten_dich_vu']}', {$row['doanh_thu']}],";
+                                }
+                            ?>
+                        ]);
 
-                var options = {
-                title: 'Biểu đồ thống kê doanh thu từng dịch vụ'
-                };
+                        var options = {
+                        title: 'Biểu đồ thống kê doanh thu từng dịch vụ'
+                        };
 
-                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-                chart.draw(data, options);
-            <?php else: ?>
-                document.getElementById('piechart').innerHTML = '<h3>Không có dữ liệu</h3>';
-            <?php endif;?>
-        }
+                        chart.draw(data, options);
+                    <?php else: ?>
+                        document.getElementById('piechart').innerHTML = '<h3>Không có dữ liệu</h3>';
+                    <?php endif;?>
+                }
         </script>
         <script type="text/javascript">
             google.charts.load('current', {'packages':['bar']});
             google.charts.setOnLoadCallback(drawChart);
 
             function drawChart() {
-                <?php if(!empty($data)):?>
+                <?php if(!empty($data['services'])):?>
 
                     var data = google.visualization.arrayToDataTable([
                         ['Dịch vụ', 'Số lượng'],
                         <?php
-                            foreach($data as $row) {
+                            foreach($data['services'] as $row) {
                                 echo "['{$row['ten_dich_vu']}', {$row['so_luong']}],";
                             }
                         ?>
@@ -69,6 +69,35 @@
             
                 }
                 <?php endif?>
+        </script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['bar']});
+            google.charts.setOnLoadCallback(drawChart3);
+            
+            function drawChart3() {
+                <?php if(!empty($data['clientBook'])): ?>
+                var data = google.visualization.arrayToDataTable([
+                    ['Khách hàng', 'Số lượng phòng đã đặt'],
+                    <?php
+                        foreach($data['clientBook'] as $row) {
+                            echo "['{$row['ten_khach']}', {$row['so_luong']}],";
+                        }
+                    ?>
+                ]);
+
+                var options = {
+                chart: {
+                    title: 'Số lượng phòng từng khách hàng',
+                    subtitle: `Xem số lượng phòng mà khách đặt từ ${formatDate(start.value)} đến ${formatDate(end.value)}`,
+                },
+                bars: 'horizontal' // Required for Material Bar Charts.
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+                <?php endif; ?>
+            }
         </script>
 </head>
 <body>
@@ -133,10 +162,10 @@
                 </div>
                 <div class="col-lg-6 p-3 my-3 border">
                     <?php
-                        if(!empty($data)) {
+                        if(!empty($data['services'])) {
                             $tongDoanhThu = 0;
                             
-                            foreach($data as $row) {
+                            foreach($data['services'] as $row) {
                                 $tongDoanhThu += $row['doanh_thu'];
                             }
                             $tongDoanhThu = formatNumber($tongDoanhThu);
@@ -152,6 +181,7 @@
                     ?>
                     <div id="piechart" style="width: 100%;; height: 300px;"></div>
                     <div id="columnchart_material" style="width: 100%;; height: 300px;"></div>
+                    <div id="barchart_material" style="width: 100%;; height: 300px;"></div>
                 </div>
             </div>
         </div>

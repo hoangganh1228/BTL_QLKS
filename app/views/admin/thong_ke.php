@@ -9,6 +9,9 @@
         if(empty($res['dichvu'])) {
             $res['dichvu'] = 0;
         } 
+        if(empty($res['tiencoc'])) {
+            $res['tiencoc'] = 0;
+        } 
     ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -18,6 +21,7 @@
       function drawChart() {
         var phong = <?php echo $res['phong']?>;
         var dichvu = <?php echo $res['dichvu']?>;
+        var tiencoc = <?php echo $res['tiencoc']?>;
         // console.log(phong);
         // console.log(dichvu);
 
@@ -30,6 +34,7 @@
             ['Task', 'Amount'],
             ['Phòng', phong],
             ['Dịch vụ', dichvu],
+            ['Tiền cọc', tiencoc]
         ]);
 
         var options = {

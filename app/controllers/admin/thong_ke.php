@@ -32,20 +32,35 @@ class Thong_Ke extends Controller
                     OR
                     (ctdp.checkout BETWEEN '$start' AND '$end')) 
                     AND 
-                    (ddp.trangthai = 'da thanh toan' OR ddp.trangthai = 'da huy')  
+                    (ddp.trangthai = 'Đã thanh toán')  
+                    AND
+                    (ctdp.trangthai = 'Đã checkin')
                 ";
+
                 $condition2 = " WHERE
-                    ctddv.ngaydat BETWEEN '$start' AND '$end'
+                    (ctddv.ngaydat BETWEEN '$start' AND '$end')
+                    AND 
+                    (ddp.trangthai = 'Đã thanh toán') 
                 ";
+                    
+                $condition3 = " WHERE
+                    (ddp.ngaydat BETWEEN '$start' AND '$end')
+                    AND 
+                    (ddp.trangthai = 'Đã hủy') 
+                ";
+
+                $data1 = $this->model->select(['SUM(ctdp.thanhtien) AS tong_tien'], "don_dat_phong AS ddp JOIN chi_tiet_dat_phong AS ctdp ON ddp.id = ctdp.iddatphong", $condition1);
                 
-                $data1 = $this->model->select(['SUM(tongtien) AS tong_tien'], "don_dat_phong AS ddp JOIN chi_tiet_dat_phong AS ctdp ON ddp.id = ctdp.iddatphong", $condition1);
+                // $data3 = $this->model->select(['ddp.tongtien', 'ctdp.sophong'], "don_dat_phong AS ddp JOIN chi_tiet_dat_phong AS ctdp ON ddp.id = ctdp.iddatphong", $condition1);
                 
-                $data2 = $this->model->select(['SUM(ctddv.thanhtien) AS tong_tien'], "chi_tiet_dat_dich_vu AS ctddv JOIN chi_tiet_dat_phong AS ctdp ON ctddv.iddatphong = ctdp.iddatphong JOIN dich_vu AS dv ON ctddv.madichvu = dv.madichvu", $condition2);
-        
+                $data2 = $this->model->select(['SUM(ctddv.thanhtien) AS tong_tien'], "chi_tiet_dat_dich_vu AS ctddv JOIN don_dat_phong AS ddp ON ddp.id = ctddv.iddatphong JOIN dich_vu AS dv ON ctddv.madichvu = dv.madichvu ", $condition2);
+                
+                $data3 = $this->model->select(['SUM(ddp.tiencoc) AS tong_tien'], "don_dat_phong AS ddp JOIN khach_hang AS kh ON ddp.makhach = kh.socancuoc", $condition3);
+
+
                 // echo '<pre>';   
-                // print_r($data1);
+                // print_r($data4);
                 // echo '</pre>';
-                $cnt = 0;
                
                 if(!empty($data1)) {
                     $res['phong'] = $data1[0]['tong_tien'];
@@ -53,6 +68,10 @@ class Thong_Ke extends Controller
         
                 if(!empty($data2)) {
                     $res['dichvu'] = $data2[0]['tong_tien'];
+                } 
+
+                if(!empty($data3)) {
+                    $res['tiencoc'] = $data3[0]['tong_tien'];
                 } 
      
             }                     

@@ -17,7 +17,7 @@ class delete_lienhe extends Controller
         echo '</pre>';
         $id = $filterAll['id'];
         $this->model->delete('lien_he', "WHERE id = '$id'");
-        redirect('admin/lien_he');
+        redirect('admin/lien_he');  
        }
     }
 }

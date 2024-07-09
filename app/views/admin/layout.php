@@ -48,7 +48,7 @@
                             <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/loaiphong">Loại phòng</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke">Thống kê NHA</a>
+                            <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/thong_ke">Thống kê</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="<?=_WEB_HOST?>/admin/nhan_vien">Nhân viên</a>
